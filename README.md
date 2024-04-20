@@ -30,7 +30,7 @@ X=pca_x.fit_transform(X)
 X = torch.FloatTensor(X).to(device)
 
 # adj spatial
-A = adj(adata,view='gene',model='RNN')
+A = adj(adata,view='gene',model='Radius')
 A = normalize_adj(A)
 A = torch.FloatTensor(A).to(device)
 
