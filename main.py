@@ -54,7 +54,7 @@ Ai = torch.FloatTensor(Ai).to(device)
 if opt.args.name == 'MBC' or opt.args.name == 'MBP' :
     y=None
 else:
-    y= np.loadtxt("E:\\shuju\\DLPHC\\"+opt.args.name+"\\y_tran.csv", delimiter=",")
+    y= np.loadtxt(load_path+opt.args.name+"truth.csv",delimiter=",")
 
 
 if opt.args.name == '151677':
