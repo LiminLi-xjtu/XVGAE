@@ -14,6 +14,19 @@ pip install git+https://github.com/LiminLi-x]Tu/XVGAE.git
 * pandas 1.3.5
 * munkres 1.1.4
 * tqdm 4.64.1
+## Data
+```bash
+data
+   |-151507
+   |-151508
+    ...
+   |-151669
+        |-spatial
+        |-151669_filtered_feature_bc_matrix.h5
+        |-151669128_0.5_200_12_simCLR_reprensentation2
+        |-
+ 
+```
 ## Usage
 ```python
 # load data
