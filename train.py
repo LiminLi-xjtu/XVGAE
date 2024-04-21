@@ -24,7 +24,7 @@ def train(model, X, y, A, Ai):
         # loss: L_{REC} and L_{KL}
         L_REC = reconstruction_loss(X, X_hat)
         L_KL = distribution_loss(Q, target_distribution(Q[0].data))
-        loss =  L_REC +opt.args.lambda_value * L_KL
+        loss =  L_REC +opt.args.gamma_value * L_KL
         # loss
         x.append(epoch)
         loss_list.append(loss.cpu().detach().numpy())
