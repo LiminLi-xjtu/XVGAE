@@ -27,15 +27,7 @@ load_path = "data/" + dataset_name + "/"
 
 # load data
 adata = sc.read_visium(path=load_path, count_file=opt.args.name+'_filtered_feature_bc_matrix.h5')
-adata.var_names_make_unique()
-sc.pp.filter_genes_dispersion(adata, n_top_genes=3000)
-sc.pp.normalize_total(adata, target_sum=1e4)
-sc.pp.log1p(adata)
-# pca x
-X = adata.X.toarray()
-pca_x = PCA(n_components=50)
-X=pca_x.fit_transform(X)
-X = torch.FloatTensor(X).to(device)
+X=get_process(adata,pca_n=50)
 
 # adj
 A = adj(adata,view='gene',model='Radius')
