@@ -255,6 +255,7 @@ def read_stereoSeq(path,
 
     return adata
 def get_process(adata,pca_n):
+    adata.var_names_make_unique()
     sc.pp.filter_genes_dispersion(adata, n_top_genes=3000)
     sc.pp.normalize_total(adata, target_sum=1e4)
     sc.pp.log1p(adata)
