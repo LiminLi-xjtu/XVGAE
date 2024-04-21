@@ -4,7 +4,7 @@ import numpy as np
 import random
 import scanpy as sc
 from sklearn.decomposition import PCA
-from utils import normalize_adj
+from utils import normalize_adj,get_process
 from XVGAE import XVGAE
 from pretrain import pretrain
 from train import train
