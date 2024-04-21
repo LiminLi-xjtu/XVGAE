@@ -254,3 +254,14 @@ def read_stereoSeq(path,
     adata.uns["spatial"][library_id]["scalefactors"]["spot_diameter_fullres"] = spot_diameter_fullres
 
     return adata
+def get_process(adata,pca_n):
+    sc.pp.filter_genes_dispersion(adata, n_top_genes=3000)
+    sc.pp.normalize_total(adata, target_sum=1e4)
+    sc.pp.log1p(adata)
+    X = adata.X.toarray()
+    pca_x = PCA(n_components=pca_n)
+    X=pca_x.fit_transform(X)
+    X = torch.FloatTensor(X).to(device)
+    return X
+
+    
