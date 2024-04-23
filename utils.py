@@ -13,7 +13,8 @@ from sklearn.cluster import KMeans
 import opt
 from sklearn.metrics import adjusted_rand_score as ari_score
 from sklearn.metrics.cluster import normalized_mutual_info_score as nmi_score
-
+import scanpy as sc
+from sklearn.decomposition import PCA
 def normalize_adj(adj, self_loop=False, symmetry=False):
     """
     normalize the adj matrix
@@ -262,7 +263,7 @@ def get_process(adata,pca_n):
     X = adata.X.toarray()
     pca_x = PCA(n_components=pca_n)
     X=pca_x.fit_transform(X)
-    X = torch.FloatTensor(X).to(device)
+   
     return X
 
     
