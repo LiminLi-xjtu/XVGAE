@@ -6,8 +6,8 @@ pip install git+https://github.com/LiminLi-x]Tu/XVGAE.git
 ```
 ## Requirements
 * Python 3.8
-* torch 2.2.2
-* Scanpy 1.9.1
+* torch 1.13.0+cu116
+* scanpy 1.9.1
 * anndata 0.8.0
 * louvain 0.8.0
 * numpy 1.22.4
