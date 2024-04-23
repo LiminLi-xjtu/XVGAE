@@ -2,7 +2,7 @@
 ![image](xvgae.png)
 ## Installation
 ```bash
-pip install git+https://github.com/LiminLi-x]Tu/XVGAE.git
+pip install git+https://github.com/LiminLi-xjtu/XVGAE.git
 ```
 ## Requirements
 * Python 3.9
