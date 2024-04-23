@@ -52,33 +52,23 @@ else:
 if opt.args.name == '151677':
     opt.args.n_clusters = 20
     opt.args.n_input = 50
-    opt.args.alpha_value = 0.2
-    opt.args.lambda_value = 10
-    opt.args.gamma_value = 1e3
+
 elif opt.args.name == "151669" or opt.args.name == "151670" or opt.args.name == "151671" or opt.args.name == "151672":
     opt.args.n_clusters = 5
     opt.args.n_input = 50
-    opt.args.alpha_value = 0.2
-    opt.args.lambda_value = 10
-    opt.args.gamma_value = 1e3
+
 elif opt.args.name == "151678":
     opt.args.n_clusters = 8
     opt.args.n_input = 50
-    opt.args.alpha_value = 0.2
-    opt.args.lambda_value = 10
-    opt.args.gamma_value = 1e3
+
 elif opt.args.name == "MBP" or opt.args.name == 'MBC':
     opt.args.n_clusters = 15
     opt.args.n_input = 50
-    opt.args.alpha_value = 0.2
-    opt.args.lambda_value = 10
-    opt.args.gamma_value = 1e3
+
 else:
     opt.args.n_clusters = 7
     opt.args.n_input = 50
-    opt.args.alpha_value = 0.2
-    opt.args.lambda_value = 10
-    opt.args.gamma_value = 1e3
+
 
 
 opt.args.device = torch.device("cuda" if opt.args.cuda else "cpu")
