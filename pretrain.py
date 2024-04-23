@@ -26,11 +26,6 @@ def pretrain(model, X, y, A, Ai):
         x.append(epoch)
         loss_list.append(loss.cpu().detach().numpy())
         if epoch == opt.args.epoch_pre:
-            plt.plot(x, loss_list, 'r', lw=5)
-            plt.title("loss")
-            plt.xlabel("steps")
-            plt.ylabel("loss")
-            plt.legend("pretrain_loss")
             load_path = "data/" + opt.args.name + "/"
             load_path = load_path + "losspretrain.png"
             plt.savefig(load_path)
@@ -50,15 +45,5 @@ def pretrain(model, X, y, A, Ai):
             torch.save(
                 model.state_dict(), load_path+"pretrain.pkl"
             )
-            adata = sc.read_visium(path=load_path, count_file=opt.args.name + '_filtered_feature_bc_matrix.h5')
-            adata.var_names_make_unique()
-            sc.pp.normalize_total(adata, target_sum=1e4)
-            sc.pp.log1p(adata)
-            print(adata)
-            print(len(ypre))
-            ypre=[str(i) for i in ypre]
-            adata.obs['y'] = ypre
-            adata.obs['y'] = adata.obs['y'].astype('category')
-            plt.rcParams["figure.figsize"] = (3, 3)
-            sc.pl.spatial(adata, color=["y"], title=[' (ARI=%.2f)' % ari],size=1.5)
+ 
 
