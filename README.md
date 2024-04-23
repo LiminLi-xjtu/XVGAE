@@ -39,7 +39,7 @@ data
 # load data
 adata = sc.read_visium(path=load_path, count_file=opt.args.name+'_filtered_feature_bc_matrix.h5')
 X=get_process(adata,pca_n=50)
-
+X = torch.FloatTensor(X).to(device)
 # adj spatial
 A = adj(adata,view='gene',model='Radius')
 A = normalize_adj(A)
