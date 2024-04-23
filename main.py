@@ -28,7 +28,7 @@ load_path = "data/" + dataset_name + "/"
 # load data
 adata = sc.read_visium(path=load_path, count_file=opt.args.name+'_filtered_feature_bc_matrix.h5')
 X=get_process(adata,pca_n=50)
-
+X = torch.FloatTensor(X).to(device)
 # adj
 A = adj(adata,view='gene',model='Radius')
 A = normalize_adj(A)
@@ -46,7 +46,7 @@ Ai = torch.FloatTensor(Ai).to(device)
 if opt.args.name == 'MBC' or opt.args.name == 'MBP' :
     y=None
 else:
-    y= np.loadtxt(load_path+opt.args.name+"truth.csv",delimiter=",")
+    y= np.loadtxt(load_path+opt.args.name+"_truth.csv",delimiter=",")
 
 
 if opt.args.name == '151677':
