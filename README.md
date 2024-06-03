@@ -43,7 +43,7 @@ adata = sc.read_visium(path=load_path, count_file=opt.args.name+'_filtered_featu
 X=get_process(adata,pca_n=50)
 X = torch.FloatTensor(X).to(device)
 # adj spatial
-A = adj(adata,view='gene',model='Radius')
+A = adj(adata,view='gene',model='Radius',rad_cutoff=150,k_cutoff=8)
 A = normalize_adj(A)
 A = torch.FloatTensor(A).to(device)
 
@@ -52,7 +52,7 @@ datai = np.loadtxt( load_path+opt.args.name+"128_0.5_200_12_simCLR_reprensentati
 pca = PCA(n_components=100)
 image_spatial=pca.fit_transform(datai)
 adata.obsm['image_spatial']=image_spatial
-Ai = adj(adata,view='image',model='KNN')
+Ai = adj(adata,view='image',model='KNN',rad_cutoff=150,k_cutoff=8)
 Ai = normalize_adj(Ai)
 Ai = torch.FloatTensor(Ai).to(device)
 
@@ -61,3 +61,5 @@ model = XVGAE(n_node=X.shape[0]).to(opt.args.device)
 pretrain(model, X, y, A, Ai)
 train(model,X, y, A, Ai)
 ```
+## 
+You can find other data and pretrain.pkl to reproduce the result：
