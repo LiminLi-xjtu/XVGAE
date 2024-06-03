@@ -194,67 +194,6 @@ import numpy as np
 from PIL import Image
 import pandas as pd
 
-def read_stereoSeq(path,
-                bin_size=100,
-                is_sparse=True,
-                library_id=None,
-                scale=None,
-                quality="hires",
-                spot_diameter_fullres=1,
-                background_color="white",):
-
-    from scipy import sparse
-    count = pd.read_csv("E:\\pycode\\TviewsA -交叉融合layer2\\data\\Stereoseq\\count.txt", sep='\t', comment='#', header=0)
-    count.dropna(inplace=True)
-    if "MIDCounts" in count.columns:
-        count.rename(columns={"MIDCounts": "UMICount"}, inplace=True)
-    count['x1'] = (count['x'] / bin_size).astype(np.int32)
-    count['y1'] = (count['y'] / bin_size).astype(np.int32)
-    count['pos'] = count['x1'].astype(str) + "-" + count['y1'].astype(str)
-    bin_data = count.groupby(['pos', 'geneID'])['UMICount'].sum()
-    cells = set(x[0] for x in bin_data.index)
-    genes = set(x[1] for x in bin_data.index)
-    cellsdic = dict(zip(cells, range(0, len(cells))))
-    genesdic = dict(zip(genes, range(0, len(genes))))
-    rows = [cellsdic[x[0]] for x in bin_data.index]
-    cols = [genesdic[x[1]] for x in bin_data.index]
-    exp_matrix = sparse.csr_matrix((bin_data.values, (rows, cols))) if is_sparse else \
-                 sparse.csr_matrix((bin_data.values, (rows, cols))).toarray()
-    obs = pd.DataFrame(index=cells)
-    var = pd.DataFrame(index=genes)
-    adata = AnnData(X=exp_matrix, obs=obs, var=var)
-    pos = np.array(list(adata.obs.index.str.split('-', expand=True)), dtype=np.int)
-    adata.obsm['spatial'] = pos
-
-    if scale == None:
-        max_coor = np.max(adata.obsm["spatial"])
-        scale = 20 / max_coor
-
-    adata.obs["imagecol"] = adata.obsm["spatial"][:, 0] * scale
-    adata.obs["imagerow"] = adata.obsm["spatial"][:, 1] * scale
-
-    # Create image
-    max_size = np.max([adata.obs["imagecol"].max(), adata.obs["imagerow"].max()])
-    max_size = int(max_size + 0.1 * max_size)
-    if background_color == "black":
-        image = Image.new("RGB", (max_size, max_size), (0, 0, 0, 0))
-    else:
-        image = Image.new("RGB", (max_size, max_size), (255, 255, 255, 255))
-    imgarr = np.array(image)
-
-    if library_id is None:
-        library_id = "StereoSeq"
-
-    adata.uns["spatial"] = {}
-    adata.uns["spatial"][library_id] = {}
-    adata.uns["spatial"][library_id]["images"] = {}
-    adata.uns["spatial"][library_id]["images"][quality] = imgarr
-    adata.uns["spatial"][library_id]["use_quality"] = quality
-    adata.uns["spatial"][library_id]["scalefactors"] = {}
-    adata.uns["spatial"][library_id]["scalefactors"]["tissue_" + quality + "_scalef"] = scale
-    adata.uns["spatial"][library_id]["scalefactors"]["spot_diameter_fullres"] = spot_diameter_fullres
-
-    return adata
 def get_process(adata,pca_n):
     adata.var_names_make_unique()
     sc.pp.filter_genes_dispersion(adata, n_top_genes=3000)
