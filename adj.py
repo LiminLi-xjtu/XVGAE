@@ -51,8 +51,8 @@ def prepare_graph_data(adj):
     indices = np.vstack((adj.col, adj.row)).transpose()
     return (indices, adj.data, adj.shape,adj)
 
-def adj(adata,model,view):
-    Cal_Spatial_Net(adata, view=view,model=model,rad_cutoff=150,k_cutoff=8)
+def adj(adata,model,view,rad_cutoff,k_cutoff):
+    Cal_Spatial_Net(adata, view=view,model=model,rad_cutoff=rad_cutoff,k_cutoff=k_cutoff)
     Spatial_Net = adata.uns['Spatial_Net']
     adata_Vars = adata
     X = pd.DataFrame(adata_Vars.X.toarray()[:, ], index=adata_Vars.obs.index, columns=adata_Vars.var.index)
