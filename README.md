@@ -1,5 +1,5 @@
 # XVGAE
-![image](xvgae.png)
+![image](流程图.pdf)
 ## Installation
 ```bash
 pip install git+https://github.com/LiminLi-xjtu/XVGAE.git
