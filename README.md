@@ -1,5 +1,8 @@
 # XVGAE
+## Overview
 ![image](xvgae.png)
+XVGAE is an innovative cross-view graph autoencoder that integrates gene expression, spatial locations, and histological images to identify spatial domains effectively. By constructing a spatial graph and a histological graph from the spatial locations and histological images, respectively, the XVGAE learns view-specific representations and propagates the view-specific information mutually by two cross-view graph convolutional networks. XVGAE enhances clustering accuracy, as demonstrated in benchmark studies on the human dorsolateral prefrontal cortex. Additionally, it demonstrates superior performance in identifying biologically significant spatial domains across various spatial transcriptomics datasets from different sequencing platforms.
+
 ## Installation
 ```bash
 pip install git+https://github.com/LiminLi-xjtu/XVGAE.git
