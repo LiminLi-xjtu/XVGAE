@@ -117,7 +117,7 @@ def clustering(Z, y):
     model = KMeans(n_clusters=opt.args.n_clusters, n_init=20)
     cluster_id = model.fit_predict(Z.data.cpu().numpy())
     ypre=cluster_id.copy()
-    if y.all()== None:
+    if y is None or (hasattr(y, 'all') and y.all() is None):
         acc=None
         nmi=None
         ari=0
