@@ -5,18 +5,19 @@
 pip install git+https://github.com/LiminLi-xjtu/XVGAE.git
 ```
 ## Requirements
-* Python 3.9
+* Python 3.8.18
 * torch 1.13.0+cu116
 * torchaudio 0.13.0+cu116
 * torchvision 0.14.0+cu116
-* scanpy 1.9.1
-* anndata 0.8.0
-* louvain 0.8.0
-* numpy 1.22.4
+* scanpy 1.9.6
+* anndata 0.9.2
+* louvain 0.8.1
+* numpy 1.24.4
 * scikit-learn 1.0.2
-* pandas 1.3.5
+* pandas 2.0.3
 * munkres 1.1.4
-* tqdm 4.64.1
+* tqdm 4.66.1
+   # cuda
 ## Data
 In order to save running time, we have extracted the histological image features and saved them in the data folder in CSV format.
 ```bash
