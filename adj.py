@@ -25,6 +25,21 @@ def Cal_Spatial_Net(adata,view='gene', rad_cutoff=None, k_cutoff=None, model='Ra
         KNN_list = []
         for it in range(indices.shape[0]):
             KNN_list.append(pd.DataFrame(zip([it] * indices.shape[1], indices[it, :], distances[it, :])))
+            
+    if model == 'KDTree':
+        from sklearn.neighbors import KDTree
+        tree = KDTree(coor)
+        distances, indices = tree.query(coor, k=k_cutoff + 1)
+        KNN_list = []
+        for it in range(indices.shape[0]):
+            KNN_list.append(pd.DataFrame(zip([it] * indices.shape[1], indices[it, :], distances[it, :])))
+    if model == 'BallTree':
+        from sklearn.neighbors import BallTree
+        tree = BallTree(coor)
+        distances, indices = tree.query(coor, k=k_cutoff + 1)
+        KNN_list = []
+        for it in range(indices.shape[0]):
+            KNN_list.append(pd.DataFrame(zip([it] * indices.shape[1], indices[it, :], distances[it, :])))
 
     KNN_df = pd.concat(KNN_list)
     KNN_df.columns = ['Cell1', 'Cell2', 'Distance']
